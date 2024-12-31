@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../entity/product.dart';
 import '../utils/screen_size.dart';
 import 'custom_bottom_bar.dart';
 import 'magic_track_pad_card.dart';
 import 'product_card.dart';
+import 'product_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,11 +18,57 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
   int selectedProductIndex = -1;
+
   final List<String> categories = [
     'ELECTRONICS',
     'TOOLS',
     'SPORTS',
     'ADVENTURE'
+  ];
+
+  final List<Product> products = [
+    Product(
+      name: 'Xbox One S',
+      price: '\$204H',
+      images: [
+        'assets/images/xbox.png',
+        'assets/images/JoyStick.png',
+        'assets/images/game_box.png',
+        'assets/images/game.png',
+      ],
+      status: 'Available',
+      time: '2:43 PM',
+      description:
+          'Here you find a wide range of goods necessary for comfortable life and work. We offer quality equipment from leading brands designed to meet your every need. Our Xbox One S rental includes everything you need for an exceptional gaming experience. The sleek design of the console complements its powerful performance, delivering stunning 4K resolution for movies and smooth gameplay. Whether you\'re diving into thrilling adventures or hosting multiplayer nights with friends, the Xbox One S is the perfect choice. With access to a vast library of games and entertainment apps, this console ensures endless entertainment. Renting with us means convenience and affordability, with flexible plans to suit your schedule. Experience the best in gaming without the upfront cost—reserve your Xbox One S today!',
+    ),
+    Product(
+      name: 'APPLE VISION',
+      price: '\$534H',
+      images: [
+        'assets/images/casqueVr.png',
+        'assets/images/VR2.png',
+        'assets/images/VR3.png',
+        'assets/images/VR1.png',
+      ],
+      status: 'Available',
+      time: '11:30 AM',
+      description:
+          'Here you find a wide range of goods necessary for comfortable life and work. We offer quality equipment from leading brands designed to meet your every need. Our Xbox One S rental includes everything you need for an exceptional gaming experience. The sleek design of the console complements its powerful performance, delivering stunning 4K resolution for movies and smooth gameplay. Whether you\'re diving into thrilling adventures or hosting multiplayer nights with friends, the Xbox One S is the perfect choice. With access to a vast library of games and entertainment apps, this console ensures endless entertainment. Renting with us means convenience and affordability, with flexible plans to suit your schedule. Experience the best in gaming without the upfront cost—reserve your Xbox One S today!',
+    ),
+    Product(
+      name: 'SONY PRO',
+      price: '\$434H',
+      images: [
+        'assets/images/cam.png',
+        'assets/images/Sony1.png',
+        'assets/images/Sony3.png',
+        'assets/images/Sony2.png',
+      ],
+      status: 'Available',
+      time: '09:30 AM',
+      description:
+          'Here you find a wide range of goods necessary for comfortable life and work. We offer quality equipment from leading brands designed to meet your every need. Our Xbox One S rental includes everything you need for an exceptional gaming experience. The sleek design of the console complements its powerful performance, delivering stunning 4K resolution for movies and smooth gameplay. Whether you\'re diving into thrilling adventures or hosting multiplayer nights with friends, the Xbox One S is the perfect choice. With access to a vast library of games and entertainment apps, this console ensures endless entertainment. Renting with us means convenience and affordability, with flexible plans to suit your schedule. Experience the best in gaming without the upfront cost—reserve your Xbox One S today!',
+    ),
   ];
 
   @override
@@ -105,35 +153,32 @@ class _HomePageState extends State<HomePage> {
             // Liste horizontale de produits
             SizedBox(
               height: SizeUtil.heightPercentage(38),
-              child: ListView(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  ProductCard(
-                    title: 'XBOX ONE S',
-                    price: '\$204H',
-                    imageAsset: 'assets/images/xbox.png',
-                    isSelected: selectedProductIndex == 0,
-                    onTap: () => setState(() => selectedProductIndex = 0),
-                  ),
-                  ProductCard(
-                    title: 'APPLE VISION',
-                    price: '\$534H',
-                    imageAsset: 'assets/images/casqueVr.png',
-                    isSelected: selectedProductIndex == 1,
-                    onTap: () => setState(() => selectedProductIndex = 1),
-                  ),
-                  ProductCard(
-                    title: 'SONY PRO',
-                    price: '\$434H',
-                    imageAsset: 'assets/images/cam.png',
-                    isSelected: selectedProductIndex == 2,
-                    onTap: () => setState(() => selectedProductIndex = 2),
-                  ),
-                ],
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return ProductCard(
+                    title: product.name,
+                    price: product.price,
+                    imageAsset: product.images[0],
+                    isSelected: selectedProductIndex == index,
+                    onTap: () {
+                      setState(() => selectedProductIndex = index);
+                      // Navigation vers la page de détails
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ProductDetailPage(product: product),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
-            const SizedBox(height: 8),
           ],
         ),
       ),
