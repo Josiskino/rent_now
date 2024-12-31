@@ -231,8 +231,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 247, 244, 244),
+                decoration: BoxDecoration(
+               // color: Color.fromARGB(255, 247, 244, 244),
+               color: Colors.grey[100],
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize
@@ -269,23 +270,24 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             ),
                             const SizedBox(height: 4),
                             Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.star,
-                                    color:
-                                        const Color.fromARGB(255, 245, 144, 49),
-                                    size: SizeUtil.iconSize(4),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    '4.8',
-                                    style: TextStyle(
-                                        fontSize: SizeUtil.textSize(3.2),
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ]),
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color:
+                                      const Color.fromARGB(255, 245, 144, 49),
+                                  size: SizeUtil.iconSize(4),
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '4.8',
+                                  style: TextStyle(
+                                      fontSize: SizeUtil.textSize(3.2),
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                         const Spacer(),
